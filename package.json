@@ -9,6 +9,7 @@
   "author": "Merge Gaming <nrashleigh@smokestack.io> (http://smokestack.io)",
   "dependencies": {
     "angular": "^1.3.3",
+    "express": "^4.10.2",
     "moment": "~2.7.0",
     "underscore": "~1.6.0"
   },
