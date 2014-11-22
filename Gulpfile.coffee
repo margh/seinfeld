@@ -4,8 +4,6 @@ source = require 'vinyl-source-stream'
 watchify = require 'watchify'
 {spawn, exec} = require 'child_process'
 
-# uglify = require 'uglify-js'
-
 errorHandler = (e) ->
   console.error e
   @emit 'end'
@@ -19,7 +17,7 @@ gulp.task 'watchify', ->
     packageCache: {}
     fullPaths: true
 
-  bundler = watchify(browserify('./src/client/entry.coffee', browserifyOptions).transform('coffeeify/no-debug'))
+  bundler = watchify(browserify('./src/client/entry.coffee', browserifyOptions).transform('coffeeify'))
   
   rebundle = ->
     bundler.bundle()
