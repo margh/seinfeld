@@ -11,4 +11,5 @@ node_modules/
 NOTES.txt
 coverage.html
 bower_components/
+public/*
 .idea

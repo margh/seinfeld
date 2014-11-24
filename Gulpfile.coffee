@@ -4,6 +4,12 @@ source = require 'vinyl-source-stream'
 watchify = require 'watchify'
 {spawn, exec} = require 'child_process'
 
+dirs = 
+  css: './public/css'
+  fonts: './public/fonts'
+  imgs: './public/imgs/'
+  js: './public/js'
+
 errorHandler = (e) ->
   console.error e
   @emit 'end'
@@ -23,7 +29,7 @@ gulp.task 'watchify', ->
     bundler.bundle()
       .on 'error', errorHandler
       .pipe source 'core.js'
-      .pipe gulp.dest './public/js'
+      .pipe gulp.dest dirs.js
     console.log 'Recompiled JS'
   bundler.on 'update', rebundle
 
