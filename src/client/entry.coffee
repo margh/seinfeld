@@ -16,3 +16,8 @@ getMonthArray = ->
 app.controller 'calCtrl', class CalCtrl
   constructor: ->
     @days = getMonthArray()
+    window.day = @days[0]
+
+app.directive 'day', ->
+  restrict: 'E'
+  templateUrl: '/templates/day-entry-tick.html'
