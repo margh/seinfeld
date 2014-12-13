@@ -3,6 +3,7 @@ _ = require 'underscore'
 mongoose = require 'mongoose'
 moment = require 'moment'
 uuid = require 'node-uuid'
+
 User = require './../structures/userStructure'
 
 module.exports =

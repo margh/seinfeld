@@ -4,8 +4,8 @@ twix = require 'twix'
 module.exports = class Day 
   constructor: (props) ->
     @checked = props.checked
+    @moment = props.moment
     @dateString = props.dateString
-    @moment = moment(@dateString, 'DD-MM-YYYY')
 
   toggle: =>
     @checked = !@checked
