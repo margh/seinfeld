@@ -2,6 +2,8 @@ _ = require 'underscore'
 moment = require 'moment'
 twix = require 'twix'
 
+DayService = require './services/dayService'
+
 Day = require './models/day'
 
 app = angular.module 'calApp', []
@@ -15,17 +17,28 @@ getMonthArray = ->
     days.push range.next()
   return days
 
-app.controller 'calCtrl', ['$http', class CalCtrl
-  constructor: (http) ->
-    cal = this
+app.service 'dayService', DayService
+
+app.controller 'calCtrl', ['dayService', class CalCtrl
+  constructor: (dayService) ->
+    @service = dayService
     @days = _.map getMonthArray(), (dateObj) -> 
       new Day {moment: dateObj, dateString: dateObj.format('DD-MM-YYYY')}
 
-    http.get('/days').success (res) ->
-      for dayData in res then do (dayData) ->
+    @getDays()
+
+  getDays: =>
+    cal = this
+    @service.getDays (e, dayList) ->
+      if e then return false
+      for dayData in dayList then do (dayData) ->
         displayDay = _.findWhere(cal.days, {dateString: dayData.dateString})
         if displayDay
           displayDay.checked = true
+
+  enterDay: (day) =>
+    day.toggle()
+    @service.enterDay(day)
 ]
 
 app.directive 'day', ->

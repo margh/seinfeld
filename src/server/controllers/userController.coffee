@@ -7,16 +7,13 @@ uuid = require 'node-uuid'
 User = require './../structures/userStructure'
 
 module.exports =
-  userGetDays: (req, res, next) ->
+  userGetAllDays: (req, res, next) ->
     User.Model.findOne {username: 'nathan'}, (e, n) ->
       res.json n.days
 
-  userCheckDay: (req, res, next) ->
+  userGetDay: (req, res, next) ->
     User.Model.findOne {username: 'nathan'}, (e, n) ->
-      n.days.push req.body.day
-      n.save (e, saved) ->
-        console.log e, saved
-        res.send 'success'
+      res.json n.day[0]
 
   userCreate: (req, res, next) ->
     user = req.body.user
@@ -41,8 +38,7 @@ module.exports =
       if doc
         bcrypt.compare login.password, doc.hash, (e, match) ->
           if match
-            # res.render 'login success'
-            console.log 'login success'
+            console.log doc.username, 'logged in'
             lastLogin = uuid.v4()
             doc.lastLogin = lastLogin
             doc.save()
@@ -52,7 +48,6 @@ module.exports =
             else
               res.redirect '/'
           else
-            # res.render 'login fail'
             res.json {e: 'loginFail'}
       else
         # res.render 'user not found'

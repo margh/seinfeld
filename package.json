@@ -31,6 +31,7 @@
     "npm": "*"
   },
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script/register -R spec -G"
+    "test": "mocha --compilers coffee:coffee-script/register -R spec -G",
+    "db": "mongod --dbpath ./db"
   }
 }

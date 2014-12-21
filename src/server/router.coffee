@@ -24,12 +24,14 @@ module.exports = (app) ->
   # -------------------------------------------------------------
   # Routes
 
-  # ## Gets
+  # ## GETs
   app.get '/', (req, res) ->
     res.sendfile './public/index.html'
 
-  app.get '/days', UserController.userGetDays
+  app.get '/days', UserController.userGetAllDays
+
+  # app.get '/days/:dateString', UserController.userGetDay
 
 
-  # ## Posts
-  app.post '/check', UserController.userCheckDay
+  # # ## PUTs
+  # app.post '/enter/:dateString', UserController.userEnterDay

@@ -8,7 +8,6 @@ UserSchema = new mongoose.Schema
   hash: String
   username: String
   lastLogin: String
-  days: [Day.Schema]
 
 UserSchema.statics.findByToken = (token, cb) ->
   @findOne {'lastLogin': token}, cb
