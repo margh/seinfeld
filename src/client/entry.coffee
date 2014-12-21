@@ -41,6 +41,19 @@ app.controller 'calCtrl', ['dayService', class CalCtrl
     @service.enterDay(day)
 ]
 
+app.directive 'navbar', ->
+  restrict: 'E'
+  templateUrl: '/templates/navbar.html'
+
+app.directive 'register', ->
+  restrict: 'E'
+  templateUrl: '/templates/register-modal.html'
+
+app.directive 'calendar', ->
+  restrict: 'E'
+  controller: 'calCtrl as cal'
+  templateUrl: '/templates/calendar.html'
+
 app.directive 'day', ->
   restrict: 'E'
   templateUrl: '/templates/day-entry.html'

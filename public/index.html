@@ -25,37 +25,11 @@
 <body>
   <div id="main">
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <a class="navbar-brand">Seinfeld</a>
+    <navbar></navbar>
 
-        <ul class="nav navbar-nav navbar-right">
-          
-          <!-- Login Bar -->
-          <li>
-            <form class="navbar-form form-signin" role="login">
-              <input class="form-control" type="text" placeholder="Username">
-              <input class="form-control" type="password" placeholder="Password">
-              <!-- <div class="input-group checkbox">
-                <span class="input-group-addon"><input type="checkbox" value="remember-me"></span>
-                <span class="input-group-addon">Remember me</span>
-              </div> -->
-              <button class="form-control btn btn-primary" type="submit" >Login</button>
-            </form>
-          </li>
+    <calendar></calendar>
 
-          <li class="vertical-divider"></li>
-          
-          <li>
-            <button class="navbar-btn btn btn-default">Register</button>
-          </li> 
-        </ul>
-
-    </nav>
-
-    <div id="calendar" class="cal-container" ng-controller="calCtrl as cal">
-      <day ng-repeat="day in cal.days"></day>
-    </div>
+    <register></register>
 
   </div>
 </body> 
