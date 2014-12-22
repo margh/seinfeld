@@ -1,6 +1,8 @@
 mongoose = require 'mongoose'
 
 UserController = require './controllers/userController'
+DayController = require './controllers/dayController'
+
 User = require './structures/userStructure'
 
 # Auth Middleware
@@ -28,10 +30,19 @@ module.exports = (app) ->
   app.get '/', (req, res) ->
     res.sendfile './public/index.html'
 
-  app.get '/days', UserController.userGetAllDays
+  app.get '/days/all', DayController.dayGetAll
 
-  # app.get '/days/:dateString', UserController.userGetDay
+  app.get '/days/:dateString', DayController.dayGet
 
 
-  # # ## PUTs
+  # ## PUTs
+  app.post '/register', (req, res, next) ->
+    console.log req.body
+  # app.post '/register', UserController.userRegister
+
   # app.post '/enter/:dateString', UserController.userEnterDay
+
+  # ## ERROR HANDLING
+  app.use (e, req, res, next) ->
+    console.error e, e.stack
+    res.send 500

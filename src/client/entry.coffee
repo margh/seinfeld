@@ -2,9 +2,17 @@ _ = require 'underscore'
 moment = require 'moment'
 twix = require 'twix'
 
-DayService = require './services/dayService'
-
+# Vanilla Classes
 Day = require './models/day'
+
+# ng services
+DayService = require './services/dayService'
+LoginService = require './services/loginService'
+RegisterService = require './services/registerService'
+
+# ng controllers
+LoginController = require './controllers/loginController'
+RegisterController = require './controllers/registerController'
 
 app = angular.module 'calApp', []
 
@@ -18,8 +26,14 @@ getMonthArray = ->
   return days
 
 app.service 'dayService', DayService
+app.service 'loginService', LoginService
+app.service 'registerService', RegisterService
 
-app.controller 'calCtrl', ['dayService', class CalCtrl
+app.controller 'LoginController', ['loginService', LoginController]
+
+app.controller 'RegisterController', ['registerService', RegisterController]
+
+app.controller 'CalendarController', ['dayService', class CalCtrl
   constructor: (dayService) ->
     @service = dayService
     @days = _.map getMonthArray(), (dateObj) -> 
@@ -45,14 +59,20 @@ app.directive 'navbar', ->
   restrict: 'E'
   templateUrl: '/templates/navbar.html'
 
+app.directive 'login', ->
+  restrict: 'E'
+  templateUrl: '/templates/login.html'
+  controller: 'LoginController as loginCtrl'
+
 app.directive 'register', ->
   restrict: 'E'
   templateUrl: '/templates/register-modal.html'
+  controller: 'RegisterController as regCtrl'
 
 app.directive 'calendar', ->
   restrict: 'E'
-  controller: 'calCtrl as cal'
   templateUrl: '/templates/calendar.html'
+  controller: 'CalendarController as calCtrl'
 
 app.directive 'day', ->
   restrict: 'E'

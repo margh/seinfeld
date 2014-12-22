@@ -3,7 +3,7 @@ moment = require 'moment'
 ObjectId = mongoose.Schema.ObjectId
 
 DaySchema = new mongoose.Schema
-  userId: ObjectId
+  userId: {type: ObjectId, index: true}
   dateString: String
   checked: Boolean
   notes: [String]

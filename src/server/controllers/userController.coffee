@@ -7,22 +7,14 @@ uuid = require 'node-uuid'
 User = require './../structures/userStructure'
 
 module.exports =
-  userGetAllDays: (req, res, next) ->
-    User.Model.findOne {username: 'nathan'}, (e, n) ->
-      res.json n.days
-
-  userGetDay: (req, res, next) ->
-    User.Model.findOne {username: 'nathan'}, (e, n) ->
-      res.json n.day[0]
-
-  userCreate: (req, res, next) ->
-    user = req.body.user
-    User.Model.findOne {username: req.body.user.username}, (e, doc) ->
+  userRegister: (req, res, next) ->
+    registration = req.body.registration
+    User.Model.findOne {username: req.body.registration.email}, (e, doc) ->
       if e then return next e
       if doc
-        res.json {e: 'usernameExists'}
+        res.json {e: 'emailExists'}
       else
-        bcrypt.genSalt 10, (e, salt) ->
+        bcrypt.genSalt 13, (e, salt) ->
           bcrypt.hash user.password, salt, (e, hash) ->
             user.hash = hash
             createdUser = new User.Model user

@@ -6,7 +6,6 @@ Day = require './dayStructure'
 UserSchema = new mongoose.Schema
   email: String
   hash: String
-  username: String
   lastLogin: String
 
 UserSchema.statics.findByToken = (token, cb) ->

@@ -1,5 +1,6 @@
 require 'coffee-script/register'
 express = require 'express'
+bodyParser = require 'body-parser'
 mongoose = require 'mongoose'
 
 router = require './router'
@@ -14,8 +15,8 @@ mongoose.connect 'mongodb://localhost:27017', (e) ->
 # Express
 port = process.env.PORT or 40080
 app = express()
-  # Could sub this out for an nginx one with better caching.
   .use express.static "./public/"
+  .use bodyParser.json()
 
 app.listen port, ->
   console.log 'listening on', port, 'in', app.settings.env
