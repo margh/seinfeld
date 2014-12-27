@@ -35,10 +35,8 @@ module.exports =
             doc.lastLogin = lastLogin
             doc.save()
             res.cookie 'login', lastLogin, { expires: moment().endOf('day').toDate(), signed: true }
-            if req.signedCookies.lastUrl
-              res.redirect req.signedCookies.lastUrl
-            else
-              res.sendStatus 200
+            # res.cookie 'username', doc.username, { expires: moment().endOf('day').toDate(), signed: true }
+            res.status(200).send({success: true, username: doc.username})
           else
             res.status(401).send {e: 'loginFail'}
       else

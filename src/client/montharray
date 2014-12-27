@@ -1,8 +1,0 @@
-# getMonthArray = -> 
-#   days = []
-#   start = moment().startOf('month')
-#   end   = moment().endOf('month')
-#   range = start.twix(end).iterate('days')
-#   while range.hasNext()
-#     days.push range.next()
-#   return days

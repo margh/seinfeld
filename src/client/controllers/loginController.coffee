@@ -4,6 +4,9 @@ module.exports = class LoginController
       email: 'nathan@admin'
       password: 'administration'
 
+    @authenticated = false
+    @username = ''
+
   reset: =>
     @model.email = ''
     @model.password = ''
@@ -15,6 +18,8 @@ module.exports = class LoginController
     @service.login(login, @response)
     @reset()
 
-  response: (e) =>
-    if e then console.log 'do something about errros'
-    console.log 'logged innnn'
+  response: (e, res) =>
+    if e then return console.log 'do something about errros'
+    console.log res
+    @authenticated = true
+    @username = res.username

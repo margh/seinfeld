@@ -2,21 +2,20 @@ module.exports = class LoginController
   constructor: (@service) ->
     @model =
       email: 'nathan@admin'
+      username: 'nrashleigh'
       password: 'administration'
       confirmPassword: 'administration'
-
-  passwordsMatch: =>
-    console.log 'validating'
-    return @model.password is @model.confirmPassword
 
   cancel: =>
     @model.email = ''
     @model.password = ''
+    @model.username = ''
     @model.confirmPassword = ''
 
   submit: =>
     registration = {
       email: @model.email
+      username: @model.username
       password: @model.password
     }
     @service.register(registration, @response)

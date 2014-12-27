@@ -4,6 +4,7 @@ moment = require 'moment'
 Day = require './dayStructure'
 
 UserSchema = new mongoose.Schema
+  username: String
   email: String
   hash: String
   lastLogin: String
