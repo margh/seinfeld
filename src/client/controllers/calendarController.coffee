@@ -29,7 +29,7 @@ module.exports = class CalendarController
       for dayData in dayList then do (dayData) ->
         displayDay = _.findWhere(cal.days, {dateString: dayData.dateString})
         if displayDay
-          displayDay.checked = true
+          displayDay.checked = dayData.checked
 
   enterDay: (day) =>
     day.toggle()
