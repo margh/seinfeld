@@ -36,9 +36,14 @@ module.exports = (app) ->
 
 
   # ## PUTs
-  app.post '/register', (req, res, next) ->
+
+  # Register
+  app.post '/users', (req, res, next) ->
     console.log req.body
-  # app.post '/register', UserController.userRegister
+  # app.post '/users', UserController.userRegister
+
+  app.post '/login', (req, res, next) ->
+    console.log req.body
 
   # app.post '/enter/:dateString', UserController.userEnterDay
 
@@ -46,3 +51,12 @@ module.exports = (app) ->
   app.use (e, req, res, next) ->
     console.error e, e.stack
     res.send 500
+
+
+# POST /logout   // destroys session and redirects to /
+# GET  /login    // gets the webpage that has the login form
+# POST /login    // authenticates credentials against database and either redirects home with a new session or redirects back to /login
+# GET  /register // gets the webpage that has the registration form
+# POST /register // records the entered information into database as a new /user/xxx
+# GET  /user/xxx // gets and renders current user data in a profile view
+# POST /user/xxx // updates new information about user

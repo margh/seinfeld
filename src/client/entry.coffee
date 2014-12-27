@@ -14,7 +14,7 @@ RegisterService = require './services/registerService'
 LoginController = require './controllers/loginController'
 RegisterController = require './controllers/registerController'
 
-app = angular.module 'calApp', []
+app = angular.module 'calApp', ['ui.utils']
 
 getMonthArray = -> 
   days = []

@@ -6,7 +6,9 @@ module.exports = class LoginController
       confirmPassword: ''
 
   passwordsMatch: =>
+    console.log 'validating'
     return @model.password is @model.confirmPassword
 
   submit: =>
+    console.log @model
     @service.register(@model)
