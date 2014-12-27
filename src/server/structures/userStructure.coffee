@@ -13,6 +13,4 @@ UserSchema.statics.findByToken = (token, cb) ->
 
 UserModel = mongoose.model 'User', UserSchema
 
-module.exports =
-  Schema: UserSchema
-  Model: UserModel
+module.exports = UserModel

@@ -1,8 +1,20 @@
 module.exports = class LoginController
-  constructor: ->
+  constructor: (@service) ->
     @model =
-      email: ''
-      password: ''
+      email: 'nathan@admin'
+      password: 'administration'
 
-  submit: ->
-    console.log @model
+  reset: =>
+    @model.email = ''
+    @model.password = ''
+    
+  submit: =>
+    login =
+      email: @model.email
+      password: @model.password
+    @service.login(login, @response)
+    @reset()
+
+  response: (e) =>
+    if e then console.log 'do something about errros'
+    console.log 'logged innnn'

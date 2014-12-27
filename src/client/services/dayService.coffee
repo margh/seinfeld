@@ -10,7 +10,7 @@ module.exports = [ '$http', ($http) ->
         .error errorHandler
 
     enterDay: (day, cb) ->
-      $http.put("/enter/#{day.dateString}", day)
+      $http.post("/days/#{day.dateString}", day)
         .success (res) ->
           # TODO Check if res is ok
           cb(null, res)

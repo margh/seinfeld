@@ -8,42 +8,41 @@ User = require './../structures/userStructure'
 
 module.exports =
   userRegister: (req, res, next) ->
-    registration = req.body.registration
-    User.Model.findOne {username: req.body.registration.email}, (e, doc) ->
+    user = req.body
+    User.findOne {email: req.body.email}, (e, doc) ->
       if e then return next e
       if doc
-        res.json {e: 'emailExists'}
+        res.status(400).send {e: 'userExists'}
       else
         bcrypt.genSalt 13, (e, salt) ->
           bcrypt.hash user.password, salt, (e, hash) ->
             user.hash = hash
-            createdUser = new User.Model user
+            createdUser = new User user
             createdUser.save (e, doc) ->
               if e then return next(e)
-              res.redirect '/'
+              res.sendStatus 201
 
   userLogin: (req, res, next) ->
     res.clearCookie 'login'
-    login = req.body.login
-    User.Model.findOne {username: login.username}, (e, doc) ->
+    login = req.body
+    User.findOne {email: login.email}, (e, doc) ->
       if e then return next(e)
       if doc
         bcrypt.compare login.password, doc.hash, (e, match) ->
           if match
-            console.log doc.username, 'logged in'
+            console.log doc.email, 'logged in'
             lastLogin = uuid.v4()
             doc.lastLogin = lastLogin
             doc.save()
-            res.cookie 'login', lastLogin, { expires: moment().endOf('day').toDate(), signed: true, httpOnly: true }
+            res.cookie 'login', lastLogin, { expires: moment().endOf('day').toDate(), signed: true }
             if req.signedCookies.lastUrl
               res.redirect req.signedCookies.lastUrl
             else
-              res.redirect '/'
+              res.sendStatus 200
           else
-            res.json {e: 'loginFail'}
+            res.status(401).send {e: 'loginFail'}
       else
-        # res.render 'user not found'
-        res.redirect '/userLoginUsereor'
+        res.status(401).send {e: 'loginFail'}
 
   userLogout: (req, res, next) ->
     res.clearCookie 'login'

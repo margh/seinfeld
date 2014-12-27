@@ -1,9 +1,10 @@
 mongoose = require 'mongoose'
+moment = require 'moment'
+
+User = require './structures/userStructure'
 
 UserController = require './controllers/userController'
 DayController = require './controllers/dayController'
-
-User = require './structures/userStructure'
 
 # Auth Middleware
 validv4 = (uuid) ->
@@ -11,13 +12,12 @@ validv4 = (uuid) ->
 
 auth = (req, res, next) ->
   unless req.signedCookies.login
-    res.cookie 'lastUrl', req.url, { expires: moment().endOf('hour').toDate(), signed: true, httpOnly: true }
-    res.redirect '/staffLogin'
+    # res.cookie 'lastUrl', req.url, { expires: moment().endOf('hour').toDate(), signed: true, httpOnly: true }
+    res.status(401).send {e: 'unauthorized'}
   else
-    if validv4 req.signedCookies.login     
-      User.Model.findByLogin req.signedCookies.login, (err, user) ->
+    if validv4 req.signedCookies.login
+      User.findByToken req.signedCookies.login, (err, user) ->
         if err then return next err
-        unless user then return res.redirect '/login'
         req.user = user  
         next()
 
@@ -30,27 +30,27 @@ module.exports = (app) ->
   app.get '/', (req, res) ->
     res.sendfile './public/index.html'
 
-  app.get '/days/all', DayController.dayGetAll
+  app.get '/days/all', auth, DayController.dayGetAll
 
-  app.get '/days/:dateString', DayController.dayGet
+  app.get '/days/:dateString', auth, DayController.dayGet
+
+  app.post '/days/:dateString', auth, DayController.dayEnter
 
 
   # ## PUTs
 
   # Register
-  app.post '/users', (req, res, next) ->
-    console.log req.body
-  # app.post '/users', UserController.userRegister
+  app.post '/users', UserController.userRegister
 
-  app.post '/login', (req, res, next) ->
-    console.log req.body
+  # Login
+  app.post '/login', UserController.userLogin
 
   # app.post '/enter/:dateString', UserController.userEnterDay
 
   # ## ERROR HANDLING
   app.use (e, req, res, next) ->
     console.error e, e.stack
-    res.send 500
+    res.sendStatus 500
 
 
 # POST /logout   // destroys session and redirects to /

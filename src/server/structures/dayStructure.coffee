@@ -10,6 +10,4 @@ DaySchema = new mongoose.Schema
 
 DayModel = mongoose.model 'Day', DaySchema
 
-module.exports =
-  Schema: DaySchema
-  Model: DayModel
+module.exports = DayModel
