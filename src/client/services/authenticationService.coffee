@@ -1,8 +1,18 @@
 errorHandler = (data, status, headers, config) ->
   console.log status, data
 
-module.exports = [ '$http', ($http) ->
+module.exports = [ '$http', '$cookies', ($http, $cookies) ->
   new class AuthenticationService
+    isAuthenticated: ->
+      !!$cookies.login
+
+    getUsername: ->
+      $cookies.username
+
+    profile: (success, fail) ->
+      $http.get('/profile')
+        .success success
+        .fail fail
 
     register: (registrationData, cb) ->
       $http.post('/users', registrationData)
@@ -10,12 +20,11 @@ module.exports = [ '$http', ($http) ->
           cb(null, res)
         .error errorHandler
 
-    login: (loginData, cb) ->
+    login: (loginData, success, fail) ->
       console.log loginData
       $http.post('/login', loginData)
-        .success (res) ->
-          cb(null, res)
-        .error errorHandler
+        .success success
+        .error fail
 
     logout: (cb) ->
       $http.post('/logout')

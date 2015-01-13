@@ -35,7 +35,7 @@ module.exports =
             doc.lastLogin = lastLogin
             doc.save()
             res.cookie 'login', lastLogin, { expires: moment().endOf('day').toDate(), signed: true }
-            # res.cookie 'username', doc.username, { expires: moment().endOf('day').toDate(), signed: true }
+            res.cookie 'username', doc.username, { expires: moment().endOf('day').toDate() }
             res.status(200).send({success: true, username: doc.username})
           else
             res.status(401).send {e: 'loginFail'}

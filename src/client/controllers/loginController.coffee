@@ -4,22 +4,23 @@ module.exports = class LoginController
       email: 'nathan@admin'
       password: 'administration'
 
-    @authenticated = false
-    @username = ''
+    @authenticated = @service.isAuthenticated()
+    @username      = @service.getUsername()
 
   reset: =>
     @model.email = ''
     @model.password = ''
-    
+
   submit: =>
     login =
       email: @model.email
       password: @model.password
-    @service.login(login, @response)
-    @reset()
+    @service.login(login, @success, @fail)
 
-  response: (e, res) =>
-    if e then return console.log 'do something about errros'
-    console.log res
+  success: (user) =>
+    @reset()
     @authenticated = true
-    @username = res.username
+    @username = user.username
+
+  fail: (e) =>
+    console.log 'login failed'

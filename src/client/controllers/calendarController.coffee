@@ -5,19 +5,20 @@ twix = require 'twix'
 # Vanilla Classes
 Day = require './../models/day'
 
-getMonthArray = -> 
-  days = []
-  start = moment().startOf('month')
-  end   = moment().endOf('month')
-  range = start.twix(end).iterate('days')
+getDates = -> 
+  days  = []
+  today = moment().startOf('day')
+  start = moment().startOf('year')
+  range = start.twix(today).iterate('days')
   while range.hasNext()
     days.push range.next()
-  return days
+  return days.reverse()
 
 module.exports = class CalendarController
   constructor: (dayService) ->
     @service = dayService
-    @days = _.map getMonthArray(), (dateObj) -> 
+    window.m = moment()
+    @days = _.map getDates(), (dateObj) -> 
       new Day {moment: dateObj, dateString: dateObj.format('DD-MM-YYYY')}
 
     @getDays()

@@ -7,7 +7,7 @@ LoginController = require './controllers/loginController'
 RegisterController = require './controllers/registerController'
 CalendarController = require './controllers/calendarController'
 
-app = angular.module 'calApp', ['ui.utils']
+app = angular.module 'calApp', ['ui.utils', 'ngCookies']
 
 app.service 'dayService', DayService
 app.service 'authenticationService', AuthenticationService
