@@ -7,7 +7,11 @@ LoginController = require './controllers/loginController'
 RegisterController = require './controllers/registerController'
 CalendarController = require './controllers/calendarController'
 
-app = angular.module 'calApp', ['ui.utils', 'ngCookies']
+app = angular.module 'calApp', [
+  'templates-app'
+  'ui.utils'
+  'ngCookies'
+]
 
 app.service 'dayService', DayService
 app.service 'authenticationService', AuthenticationService
@@ -18,23 +22,23 @@ app.controller 'CalendarController', ['dayService', CalendarController]
 
 app.directive 'navbar', ->
   restrict: 'E'
-  templateUrl: '/templates/navbar.html'
+  templateUrl: 'templates/navbar'
 
 app.directive 'login', ->
   restrict: 'E'
-  templateUrl: '/templates/login.html'
+  templateUrl: 'templates/login'
   controller: 'LoginController as loginCtrl'
 
 app.directive 'register', ->
   restrict: 'E'
-  templateUrl: '/templates/register-modal.html'
+  templateUrl: 'templates/register-modal'
   controller: 'RegisterController as regCtrl'
 
 app.directive 'calendar', ->
   restrict: 'E'
-  templateUrl: '/templates/calendar.html'
+  templateUrl: 'templates/calendar'
   controller: 'CalendarController as calCtrl'
 
 app.directive 'day', ->
   restrict: 'E'
-  templateUrl: '/templates/day-entry.html'
+  templateUrl: 'templates/day-entry'

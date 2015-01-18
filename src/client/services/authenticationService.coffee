@@ -1,7 +1,7 @@
 errorHandler = (data, status, headers, config) ->
   console.log status, data
 
-module.exports = [ '$http', '$cookies', ($http, $cookies) ->
+module.exports = [ '$http', '$cookies', 'dayService', ($http, $cookies, dayService) ->
   new class AuthenticationService
     isAuthenticated: ->
       !!$cookies.login

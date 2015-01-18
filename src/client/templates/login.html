@@ -1,0 +1,21 @@
+<ul class="nav navbar-nav navbar-right">
+  <li>
+    <p class="navbar-text" ng-show="loginCtrl.authenticated">Signed in as <span ng-bind="loginCtrl.username"></span></p>
+
+    <form class="navbar-form form-signin" role="login" ng-submit="loginCtrl.submit()" ng-hide="loginCtrl.authenticated">
+      <input class="form-control" ng-model="loginCtrl.model.email" type="text" placeholder="Email">
+      <input class="form-control" ng-model="loginCtrl.model.password" type="password" placeholder="Password">
+      <button class="form-control btn btn-primary" type="submit" >Login</button>
+      <!-- <div class="input-group checkbox">
+        <span class="input-group-addon"><input type="checkbox" value="remember-me"></span>
+        <span class="input-group-addon">Remember me</span>
+      </div> -->
+    </form>
+  </li>
+
+  <!-- <li class="vertical-divider"></li> -->
+        
+  <li>
+    <button class="navbar-btn btn btn-default" data-toggle="modal" data-target="#register-modal" ng-hide="loginCtrl.authenticated">Register</button>
+  </li> 
+</ul>

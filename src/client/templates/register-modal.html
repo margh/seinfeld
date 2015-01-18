@@ -1,0 +1,31 @@
+<!-- Register Pane -->
+<div class="modal fade" id="register-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Register</h4>
+      </div>
+      <form name="registerForm" class="form" role="signup" novalidate>
+        <div class="modal-body">
+            <div class="form-group">
+              <input class="form-control" ng-model="regCtrl.model.email" required type="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input class="form-control" ng-model="regCtrl.model.username" required type="text" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <input class="form-control" ng-model="regCtrl.model.password" required minlength=10 type="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <input class="form-control" ng-model="regCtrl.model.confirmPassword" required minlength=10 type="password" placeholder="Confirm password" ui-validate="' $value==regCtrl.model.password '" ui-validate-watch="' regCtrl.model.password '">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-warning" data-dismiss="modal" ng-click="regCtrl.cancel()">Cancel</button>
+          <button class="btn btn-primary" data-dismiss="modal" type="button" ng-disabled="registerForm.$invalid" ng-click="regCtrl.submit()">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
