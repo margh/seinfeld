@@ -1,22 +1,6 @@
-@days-per-row: 7;
-@day-margin: 2%;
-
 body { padding-top: 70px; }
 
-.cal-box {
-  display: inline-block;
-  margin: @day-margin;
-  width: (percentage( 1 / @days-per-row) - ( @day-margin * 2));
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  -o-user-select: none;
-  user-select: none;
-}
-
-.cal-date {
-  font-size: 1em;
-}
+@import "./components/day.less";
 
 .ng-invalid.ng-dirty {
   border-color: red;

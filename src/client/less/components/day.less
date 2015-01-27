@@ -1,0 +1,22 @@
+@days-per-row: 7;
+@day-margin-vertical: 2vh;
+@day-margin-horizontal: 2vw;
+@day-size: ( 100 / @days-per-row) - ( @day-margin-horizontal * 2);
+
+.day-box {
+  display: inline-block;
+  margin: @day-margin-vertical @day-margin-horizontal;
+  width: @day-size;
+  height: @day-size;
+
+  /* Don't select these */
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  -o-user-select: none;
+  user-select: none;
+}
+
+.day-date {
+  font-size: 1em;
+}
