@@ -58,14 +58,21 @@ module.exports = (grunt) ->
             'public/js/templates.js'
           ]
 
+    # Build bootstrap with custom overrides and compile bespoke less
+    less:
+      app:
+        files:
+          'lib/bootstrap.css': 'src/client/less/bootstrap.less'
+          'lib/styles.css': 'src/client/less/styles.less'
+
     # Compiles all custom and dep styles into one css file
     cssmin:
       app:
         files:
           'public/css/main.css': [
-            'bower_components/bootstrap/dist/css/bootstrap.css'
+            'lib/bootstrap.css'
             'bower_components/font-awesome/css/font-awesome.css'
-            'src/client/styles/styles.css'
+            'lib/styles.css'
           ]
 
     # Copy fonts from libraries
@@ -104,6 +111,9 @@ module.exports = (grunt) ->
       templates:
         files: ['src/client/templates/**/*.html']
         tasks: ['html2js']
+      less:
+        files: ['src/client/less/**/*.less']
+        tasks: ['less:app', 'build:css']
       livereload:
         options:
           livereload: true
@@ -123,6 +133,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
+  grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-env'
@@ -147,6 +158,7 @@ module.exports = (grunt) ->
     'clean:dev'
     'newer:uglify:lib'
     'build:js'
+    'less:app'
     'build:css'
     'newer:copy:fonts'
   ]
@@ -157,6 +169,7 @@ module.exports = (grunt) ->
     'uglify:lib'
     'uglify::dist'
     'clean:dist'
+    'less:app'
     'build:css'
     'copy:fonts'
     'jade:dist'

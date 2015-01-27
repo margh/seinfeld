@@ -7,12 +7,15 @@ Day = require './../models/day'
 
 getDates = ->
   days  = []
+
+  # Draw up to today
   today = moment().startOf('day')
+
   start = moment().startOf('year')
   range = start.twix(today).iterate('days')
   while range.hasNext()
     days.push range.next()
-  return days.reverse()
+  return days
 
 module.exports = [
   'dayService',
