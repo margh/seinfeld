@@ -7,6 +7,7 @@ module.exports = (grunt) ->
             value: './node_modules/.bin'
             delimiter: ':'
 
+    # Compiles coffee into browser-ready js
     browserify:
       app:
         files: 'public/js/core.js': ['src/client/entry.coffee']
@@ -16,6 +17,7 @@ module.exports = (grunt) ->
             extensions: ['.coffee']
             debug: true
 
+    # Converts html templates into js angular templates
     html2js:
       app:
         options:
@@ -26,6 +28,8 @@ module.exports = (grunt) ->
         src: ['src/client/templates/**/*.html']
         dest: 'public/js/templates.js'
 
+
+    # Concat and minify JS deps
     uglify:
       lib:
         options:
@@ -40,9 +44,10 @@ module.exports = (grunt) ->
             'bower_components/angular-ui-utils/ui-utils.js'
             'bower_components/angular-cookies/angular-cookies.js'
             'bower_components/moment/moment.js'
-            'bower_components/semantic-ui/dist/semantic.js'
+            'bower_components/bootstrap/dist/js/bootstrap.js'
           ]
 
+      # Compiles all debug js files into one prod ready js file
       dist:
         options:
           sourceMap: false
@@ -53,22 +58,37 @@ module.exports = (grunt) ->
             'public/js/templates.js'
           ]
 
+    # Compiles all custom and dep styles into one css file
     cssmin:
       app:
         files:
           'public/css/main.css': [
-            'bower_components/semantic-ui/dist/semantic.css'
-            'public/css/styles.css'
+            'bower_components/bootstrap/dist/css/bootstrap.css'
+            'bower_components/font-awesome/css/font-awesome.css'
+            'src/client/styles/styles.css'
           ]
 
+    # Copy fonts from libraries
     copy:
-      themes:
-        cwd: 'bower_components/semantic-ui/dist/themes/'
-        src: ['**/*']
-        dest: 'public/themes'
-        expand: true
-        filter: 'isFile'
+      fonts:
+        files: [
+          {
+            cwd: 'bower_components/bootstrap/dist/fonts/'
+            src: ['*']
+            dest: 'public/fonts'
+            expand: true
+            filter: 'isFile'
+          }
+          {
+            cwd: 'bower_components/font-awesome/fonts/'
+            src: ['*']
+            dest: 'public/fonts'
+            expand: true
+            filter: 'isFile'
+          }
+        ]
 
+    # Runs the Express server
     express:
       dev:
         options:
@@ -76,6 +96,7 @@ module.exports = (grunt) ->
           port: 40080
           script: 'src/server/server.coffee'
 
+    # Watch these files and re-run the specified tasks when they change
     watch:
       browserify:
         files: ['src/client/**/*.coffee']
@@ -92,6 +113,7 @@ module.exports = (grunt) ->
           'public/js/*.*'
         ]
 
+    # Cleans (deletes files in) these folders
     clean:
       app: ['app']
       dev: ['public/js/*']
@@ -126,7 +148,7 @@ module.exports = (grunt) ->
     'newer:uglify:lib'
     'build:js'
     'build:css'
-    'newer:copy:themes'
+    'newer:copy:fonts'
   ]
 
   grunt.registerTask 'build:dist', [
@@ -136,7 +158,7 @@ module.exports = (grunt) ->
     'uglify::dist'
     'clean:dist'
     'build:css'
-    'copy:themes'
+    'copy:fonts'
     'jade:dist'
   ]
 
