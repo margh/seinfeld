@@ -16,9 +16,9 @@ app = angular.module 'calApp', [
 app.service 'dayService', DayService
 app.service 'authenticationService', AuthenticationService
 
-app.controller 'LoginController'   , ['authenticationService', LoginController]
-app.controller 'RegisterController', ['authenticationService', RegisterController]
-app.controller 'CalendarController', ['dayService', CalendarController]
+app.controller 'LoginController'   , LoginController
+app.controller 'RegisterController', RegisterController
+app.controller 'CalendarController', CalendarController
 
 app.directive 'navbar', ->
   restrict: 'E'
