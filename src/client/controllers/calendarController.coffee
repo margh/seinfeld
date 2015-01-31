@@ -9,9 +9,8 @@ getDates = ->
   days  = []
 
   # Draw up to today
-  today = moment().startOf('day')
-
-  start = moment().startOf('year')
+  today = moment().endOf('year')
+  start = moment().startOf('year').startOf('week') # Make sure we start on a Monday
   range = start.twix(today).iterate('days')
   while range.hasNext()
     days.push range.next()

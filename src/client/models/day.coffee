@@ -6,3 +6,6 @@ module.exports = class Day
 
   toggle: =>
     @checked = !@checked
+
+  monthIsEven: =>
+    return @moment.month() % 2 # January is 0

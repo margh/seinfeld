@@ -1,10 +1,9 @@
-<div class="well day-box">
-  <div class="text-center day-date" ng-click="calCtrl.enterDay(day)">
-    <div class='day-tickbox'>
-      <i class="fa fa-square-o" ng-show="!day.checked"></i>
-      <i class="fa fa-check-square" ng-show="day.checked"></i>
-    </div>
-    <span>{{ day.moment.date() }}</span>
+<div class="well day-box" ng-class="{ 'day-box-even' : day.monthIsEven() , 'day-box-odd' : !day.monthIsEven() }" ng-click="calCtrl.enterDay(day)">
+  <span ng-show="day.moment.date() === 1">
+    {{ day.moment.format('MMM') }}
+  </span>
+  <span> {{day.moment.date()}}</span>
+  <div class="day-tick">
+    <i class="fa fa-check" ng-show="day.checked"></i>
   </div>
-  <!-- <div> notes </div> -->
 </div>

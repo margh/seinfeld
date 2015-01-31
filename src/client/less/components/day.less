@@ -8,6 +8,7 @@
   margin: @day-margin-vertical @day-margin-horizontal;
   width: @day-size;
   height: @day-size;
+  text-align: center;
 
   /* Don't select these */
   -webkit-user-select: none;  /* Chrome all / Safari all */
@@ -15,8 +16,14 @@
   -ms-user-select: none;      /* IE 10+ */
   -o-user-select: none;
   user-select: none;
+
+  overflow: hidden;
 }
 
-.day-date {
-  font-size: 1em;
+.day-box-even {
+  background-color: #A0A0A0
+}
+
+.day-tick {
+  font-size: 2.5em;
 }
