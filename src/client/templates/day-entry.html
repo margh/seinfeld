@@ -2,7 +2,7 @@
   <span ng-show="day.moment.date() === 1">
     {{ day.moment.format('MMM') }}
   </span>
-  <span> {{day.moment.date()}}</span>
+  <span> {{day.moment.format('ddd D')}}</span>
   <div class="day-tick">
     <i class="fa fa-check" ng-show="day.checked"></i>
   </div>
