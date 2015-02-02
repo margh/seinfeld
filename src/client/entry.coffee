@@ -39,6 +39,11 @@ app.directive 'calendar', ->
   templateUrl: 'templates/calendar'
   controller: 'CalendarController as calCtrl'
 
+app.directive 'journal', ->
+  restrict: 'E'
+  templateUrl: 'templates/journal'
+  controller: 'JournalController as jCtrl'
+
 app.directive 'day', ->
   restrict: 'E'
   templateUrl: 'templates/day-entry'

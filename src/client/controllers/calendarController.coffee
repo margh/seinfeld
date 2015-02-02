@@ -9,8 +9,8 @@ getDates = ->
   days  = []
 
   # Draw up to today
-  today = moment().endOf('year')
-  start = moment().startOf('year').startOf('isoweek') # Make sure we start on a Monday (need isoweek)
+  today = moment()
+  start = moment().subtract(2,'months').startOf('isoweek') # Make sure we start on a Monday (need isoweek)
   range = start.twix(today).iterate('days')
   while range.hasNext()
     days.push range.next()
@@ -21,7 +21,6 @@ module.exports = [
   class CalendarController
     constructor: (dayService) ->
       @service = dayService
-      window.m = moment()
       @days = _.map getDates(), (dateObj) ->
         new Day {moment: dateObj, dateString: dateObj.format('DD-MM-YYYY')}
 

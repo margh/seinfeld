@@ -1,9 +1,9 @@
-<div class="well day-box" ng-class="{ 'day-box-even' : day.monthIsEven() , 'day-box-odd' : !day.monthIsEven() }" ng-click="calCtrl.enterDay(day)">
-  <span ng-show="day.moment.date() === 1">
-    {{ day.moment.format('MMM') }}
-  </span>
-  <span> {{day.moment.format('ddd D')}}</span>
-  <div class="day-tick">
-    <i class="fa fa-check" ng-show="day.checked"></i>
+<div class="day-box" ng-class="{ 'day-box-even' : day.monthIsEven() , 'day-box-odd' : !day.monthIsEven() }" ng-click="calCtrl.enterDay(day)">
+  <div class="day-date">
+    <span ng-show="day.moment.date() === 1"> {{ day.moment.format('MMM') }}</span>
+    {{day.moment.format('ddd D')}}
+  </div>
+  <div class="day-tick-grid">
+    <i class="day-tick fa fa-check" ng-show="day.checked"></i>
   </div>
 </div>

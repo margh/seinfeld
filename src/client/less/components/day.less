@@ -4,11 +4,14 @@
 @day-size: ( 100 / @days-per-row) - ( @day-margin-horizontal * 2);
 
 .day-box {
+  background-color: #AAA;
   display: inline-block;
   margin: @day-margin-vertical @day-margin-horizontal;
   width: @day-size;
   height: @day-size;
   text-align: center;
+
+  border-radius: 10px;
 
   /* Don't select these */
   -webkit-user-select: none;  /* Chrome all / Safari all */
@@ -21,9 +24,23 @@
 }
 
 .day-box-even {
-  background-color: #A0A0A0
+  background-color: #888
+}
+
+.day-date {
+  border-bottom: 2px solid gray;
+}
+
+.day-box-even .day-date {
+  border-bottom: 2px solid #222;
+}
+
+.day-tick-grid {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .day-tick {
   font-size: 2.5em;
+  flex: 1 0 auto;
 }
