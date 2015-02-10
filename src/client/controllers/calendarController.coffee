@@ -24,6 +24,7 @@ module.exports = [
         new Day {moment: dateObj, dateString: dateObj.format('DD-MM-YYYY')}
 
       @getDays()
+      @selectDay @days[@days.length - 1] # default to today
 
     getDays: =>
       cal = this
