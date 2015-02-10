@@ -1,5 +1,3 @@
-_ = require 'underscore'
-
 Day = require './../structures/dayStructure'
 
 module.exports =

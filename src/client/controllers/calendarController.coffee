@@ -1,4 +1,3 @@
-_ = require 'underscore'
 moment = require 'moment'
 twix = require 'twix'
 
@@ -25,6 +24,7 @@ module.exports = [
         new Day {moment: dateObj, dateString: dateObj.format('DD-MM-YYYY')}
 
       @getDays()
+      @selectDay @days[@days.length - 1] # default to today
 
     getDays: =>
       cal = this
@@ -35,9 +35,8 @@ module.exports = [
           if displayDay
             displayDay.checked = dayData.checked
 
-    enterDay: (day) =>
-      day.toggle()
-      @service.enterDay(day, @response)
+    selectDay: (day) =>
+      @service.selectDay(day)
 
     response: (e) =>
       if e then console.log 'do something about errros'
