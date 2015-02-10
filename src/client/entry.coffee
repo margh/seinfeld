@@ -6,6 +6,7 @@ AuthenticationService = require './services/authenticationService'
 LoginController = require './controllers/loginController'
 RegisterController = require './controllers/registerController'
 CalendarController = require './controllers/calendarController'
+DayController = require './controllers/dayController'
 
 app = angular.module 'calApp', [
   'templates-app'
@@ -19,6 +20,8 @@ app.service 'authenticationService', AuthenticationService
 app.controller 'LoginController'   , LoginController
 app.controller 'RegisterController', RegisterController
 app.controller 'CalendarController', CalendarController
+app.controller 'DayController'     , DayController
+
 
 app.directive 'navbar', ->
   restrict: 'E'
@@ -47,3 +50,4 @@ app.directive 'journal', ->
 app.directive 'day', ->
   restrict: 'E'
   templateUrl: 'templates/day-entry'
+  controller: 'DayController as dCtrl'

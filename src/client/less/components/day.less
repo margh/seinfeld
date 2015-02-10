@@ -1,17 +1,14 @@
 @days-per-row: 7;
-@day-margin-vertical: 2vh;
-@day-margin-horizontal: 2vw;
-@day-size: ( 100 / @days-per-row) - ( @day-margin-horizontal * 2);
+@day-size: ((100 - (@calendar-padding * 2)) / @days-per-row);
 
 .day-box {
   background-color: #AAA;
   display: inline-block;
-  margin: @day-margin-vertical @day-margin-horizontal;
   width: @day-size;
   height: @day-size;
   text-align: center;
 
-  border-radius: 10px;
+  border: solid 1px black;
 
   /* Don't select these */
   -webkit-user-select: none;  /* Chrome all / Safari all */
