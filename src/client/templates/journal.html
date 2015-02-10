@@ -1,3 +1,9 @@
-<nav class="navbar navbar-inverse navbar-fixed-bottom journal arrow-pos-2">
-  <div> what it do </div>
+<nav class="navbar navbar-inverse navbar-fixed-bottom journal arrow-pos-{{jCtrl.getArrowPosition()}}">
+  <div class="day-tick-grid">
+    <i class="day-tick fa fa-check" ng-show="jCtrl.day.checked"></i>
+  </div>
+
+  <div ng-bind="jCtrl.day.dateString"></div>
+
+  <div> {{jCtrl.day.moment}} </div>
 </nav>

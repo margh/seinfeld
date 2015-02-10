@@ -1,4 +1,3 @@
-_ = require 'underscore'
 moment = require 'moment'
 twix = require 'twix'
 
@@ -35,9 +34,8 @@ module.exports = [
           if displayDay
             displayDay.checked = dayData.checked
 
-    enterDay: (day) =>
-      day.toggle()
-      @service.enterDay(day, @response)
+    selectDay: (day) =>
+      @service.selectDay(day)
 
     response: (e) =>
       if e then console.log 'do something about errros'

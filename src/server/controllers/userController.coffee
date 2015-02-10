@@ -1,5 +1,5 @@
 bcrypt = require 'bcrypt'
-_ = require 'underscore'
+_ = require 'lodash'
 mongoose = require 'mongoose'
 moment = require 'moment'
 uuid = require 'node-uuid'
