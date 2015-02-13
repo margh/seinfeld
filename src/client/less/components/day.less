@@ -20,16 +20,14 @@
   overflow: hidden;
 }
 
-.day-box-journal {
-  width: @day-size * 1.5;
-  height: @day-size * 1.5;
-}
-
 .day-box-even {
   background-color: #888
 }
 
 .day-date {
+  // Gross, need it so the tick boxes get centred correctly though.
+  position: absolute;
+  width: @day-size;
   border-bottom: 2px solid gray;
 }
 
@@ -40,9 +38,13 @@
 .day-tick-grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center; /* align horizontal */
+  align-items: center;
+  height: @day-size;
 }
 
 .day-tick {
-  font-size: 2.5em;
+  width: 50%;
+  font-size: 4em;
   flex: 1 0 auto;
 }

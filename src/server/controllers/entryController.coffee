@@ -1,8 +1,9 @@
+_ = require 'lodash'
 Entry = require './../structures/entryStructure'
 
 module.exports =
   entryEnter: (req, res, next) ->
-    entry = req.body
+    entry = _.pick req.body, ['checked', 'dateString', 'notes']
     console.log entry
     Entry.findOneAndUpdate {userId: req.user.id, dateString: entry.dateString}, entry, {upsert: true}, (e, entry) ->
       if e then return next(e)
