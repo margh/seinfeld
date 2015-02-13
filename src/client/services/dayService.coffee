@@ -22,6 +22,12 @@ module.exports = [ '$http', ($http) ->
   dates = _.map getDates(), (momentObj) ->
     return new Day {moment: momentObj, dateString: momentObj.format('DD-MM-YYYY')}
 
+  _updateDay = (entry) ->
+    date = _.findWhere dates, {dateString: entry.dateString}
+    if date
+      for key, value of entry
+        date[key] = value
+
   return {
     selected: {}
     dates: dates
@@ -29,20 +35,12 @@ module.exports = [ '$http', ($http) ->
     getEntries: ->
       $http.get('/entries/all')
         .success (res) ->
-          console.log res
-          for dayData in res then do (dayData) =>
-            date = _.findWhere dates, {dateString: dayData.dateString}
-            console.log date
-            if date
-              for key, value of dayData
-                date[key] = value
+          _.each res, _updateDay
         .error errorHandler
 
     enterDay: (entry, cb) ->
       $http.post("/entries/#{entry.dateString}", entry)
-        .success (res) ->
-          # TODO Check if res is ok
-          cb(null, res)
+        .success _updateDay
         .error errorHandler
 
     # This sucks
@@ -51,7 +49,6 @@ module.exports = [ '$http', ($http) ->
     # will lose the reference to the object and won't
     # watch for value changes.
     selectDay: (day) ->
-      console.log day
       for key, value of day
         @selected[key] = value
   }

@@ -6,18 +6,22 @@ User = require './structures/userStructure'
 UserController = require './controllers/userController'
 EntryController = require './controllers/entryController'
 
+# 30 days
+loginExpireTime = 2592000000
+
 # Auth Middleware
 validv4 = (uuid) ->
   (uuid.search /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/) isnt -1
 
 auth = (req, res, next) ->
   unless req.signedCookies.login
-    # res.cookie 'lastUrl', req.url, { expires: moment().endOf('hour').toDate(), signed: true, httpOnly: true }
     res.status(401).send {e: 'unauthorized'}
   else
     if validv4 req.signedCookies.login
       User.findByToken req.signedCookies.login, (err, user) ->
         if err then return next err
+        if Date.now() - user.lastLoginTime > loginExpireTime
+          return res.status(401).send {e: 'loginExpired'}
         req.user = user
         next()
 

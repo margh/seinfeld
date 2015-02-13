@@ -8,6 +8,7 @@ UserSchema = new mongoose.Schema
   email: String
   hash: String
   lastLogin: String
+  lastLoginTime: Date
 
 UserSchema.statics.findByToken = (token, cb) ->
   @findOne {'lastLogin': token}, cb

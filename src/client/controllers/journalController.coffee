@@ -8,8 +8,7 @@ module.exports = [
 
     enterDay: =>
       @day.checked = !@day.checked
-      @service.enterDay @day, (e) =>
-        unless e then return console.log 'checked', @day.dateString
+      @service.enterDay @day
 
     getArrowPosition: ->
       if @day.moment
@@ -21,8 +20,4 @@ module.exports = [
 
     displayDay: ->
       return @day.moment.format("dddd, MMMM Do YYYY")
-
-    response: (e) =>
-      if e then console.log 'do something about errros'
-      console.log 'great success'
 ]
