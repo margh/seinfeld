@@ -1,39 +1,12 @@
-moment = require 'moment'
-twix = require 'twix'
-
-# Vanilla Classes
-Day = require './../models/day'
-
-getDates = ->
-  days  = []
-
-  # Draw up to today
-  today = moment()
-  start = moment().subtract(2,'months').startOf('isoweek') # Make sure we start on a Monday (need isoweek)
-  range = start.twix(today).iterate('days')
-  while range.hasNext()
-    days.push range.next()
-  return days
-
 module.exports = [
   'dayService',
   class CalendarController
     constructor: (dayService) ->
       @service = dayService
-      @days = _.map getDates(), (dateObj) ->
-        new Day {moment: dateObj, dateString: dateObj.format('DD-MM-YYYY')}
+      @days = @service.dates
 
-      @getDays()
+      @service.getEntries()
       @selectDay @days[@days.length - 1] # default to today
-
-    getDays: =>
-      cal = this
-      @service.getDays (e, dayList) ->
-        if e then return false
-        for dayData in dayList then do (dayData) ->
-          displayDay = _.findWhere(cal.days, {dateString: dayData.dateString})
-          if displayDay
-            displayDay.checked = dayData.checked
 
     selectDay: (day) =>
       @service.selectDay(day)

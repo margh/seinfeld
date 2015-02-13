@@ -4,7 +4,7 @@ moment = require 'moment'
 User = require './structures/userStructure'
 
 UserController = require './controllers/userController'
-DayController = require './controllers/dayController'
+EntryController = require './controllers/entryController'
 
 # Auth Middleware
 validv4 = (uuid) ->
@@ -18,7 +18,7 @@ auth = (req, res, next) ->
     if validv4 req.signedCookies.login
       User.findByToken req.signedCookies.login, (err, user) ->
         if err then return next err
-        req.user = user  
+        req.user = user
         next()
 
 module.exports = (app) ->
@@ -30,11 +30,11 @@ module.exports = (app) ->
   app.get '/', (req, res) ->
     res.sendfile './public/index.html'
 
-  app.get '/days/all', auth, DayController.dayGetAll
+  app.get '/entries/all', auth, EntryController.entryGetAll
 
-  app.get '/days/:dateString', auth, DayController.dayGet
+  app.get '/entries/:dateString', auth, EntryController.entryGet
 
-  app.post '/days/:dateString', auth, DayController.dayEnter
+  app.post '/entries/:dateString', auth, EntryController.entryEnter
 
 
   # ## PUTs

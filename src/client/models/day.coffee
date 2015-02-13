@@ -3,6 +3,7 @@ module.exports = class Day
     @checked = props.checked
     @moment = props.moment
     @dateString = props.dateString
+    @notes = props.notes
 
   toggle: =>
     @checked = !@checked

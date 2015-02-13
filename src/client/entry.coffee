@@ -17,7 +17,6 @@ app = angular.module 'calApp', [
 
 app.service 'dayService', DayService
 app.service 'authenticationService', AuthenticationService
-app.service 'selectedDay', {}
 
 app.controller 'LoginController'   , LoginController
 app.controller 'RegisterController', RegisterController

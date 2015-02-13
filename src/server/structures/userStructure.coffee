@@ -1,7 +1,7 @@
 mongoose = require 'mongoose'
 moment = require 'moment'
 
-Day = require './dayStructure'
+Entry = require './entryStructure'
 
 UserSchema = new mongoose.Schema
   username: String
