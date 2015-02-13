@@ -1,21 +1,46 @@
+moment = require 'moment'
+twix = require 'twix'
+
+# Vanilla Classes
+Day = require './../models/day'
+
 errorHandler = (data, status, headers, config) ->
   console.log status, data
 
-module.exports = [ '$http', ($http) ->
-  return {
-    selectedDay: {}
+getDates = ->
+  days  = []
 
-    getDays: (cb) ->
-      $http.get('/days/all')
+  # Draw up to today
+  today = moment()
+  start = moment().subtract(2,'months').startOf('isoweek') # Make sure we start on a Monday (need isoweek)
+  range = start.twix(today).iterate('days')
+  while range.hasNext()
+    days.push range.next()
+  return days
+
+module.exports = [ '$http', ($http) ->
+  dates = _.map getDates(), (momentObj) ->
+    return new Day {moment: momentObj, dateString: momentObj.format('DD-MM-YYYY')}
+
+  _updateDay = (entry) ->
+    date = _.findWhere dates, {dateString: entry.dateString}
+    if date
+      for key, value of entry
+        date[key] = value
+
+  return {
+    selected: {}
+    dates: dates
+
+    getEntries: ->
+      $http.get('/entries/all')
         .success (res) ->
-          cb(null, res)
+          _.each res, _updateDay
         .error errorHandler
 
-    enterDay: (day, cb) ->
-      $http.post("/days/#{day.dateString}", day)
-        .success (res) ->
-          # TODO Check if res is ok
-          cb(null, res)
+    enterDay: (entry, cb) ->
+      $http.post("/entries/#{entry.dateString}", entry)
+        .success _updateDay
         .error errorHandler
 
     # This sucks
@@ -25,6 +50,6 @@ module.exports = [ '$http', ($http) ->
     # watch for value changes.
     selectDay: (day) ->
       for key, value of day
-        @selectedDay[key] = value
+        @selected[key] = value
   }
 ]

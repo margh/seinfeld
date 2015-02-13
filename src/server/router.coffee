@@ -4,7 +4,10 @@ moment = require 'moment'
 User = require './structures/userStructure'
 
 UserController = require './controllers/userController'
-DayController = require './controllers/dayController'
+EntryController = require './controllers/entryController'
+
+# 30 days
+loginExpireTime = 2592000000
 
 # Auth Middleware
 validv4 = (uuid) ->
@@ -12,13 +15,14 @@ validv4 = (uuid) ->
 
 auth = (req, res, next) ->
   unless req.signedCookies.login
-    # res.cookie 'lastUrl', req.url, { expires: moment().endOf('hour').toDate(), signed: true, httpOnly: true }
     res.status(401).send {e: 'unauthorized'}
   else
     if validv4 req.signedCookies.login
       User.findByToken req.signedCookies.login, (err, user) ->
         if err then return next err
-        req.user = user  
+        if Date.now() - user.lastLoginTime > loginExpireTime
+          return res.status(401).send {e: 'loginExpired'}
+        req.user = user
         next()
 
 module.exports = (app) ->
@@ -30,11 +34,11 @@ module.exports = (app) ->
   app.get '/', (req, res) ->
     res.sendfile './public/index.html'
 
-  app.get '/days/all', auth, DayController.dayGetAll
+  app.get '/entries/all', auth, EntryController.entryGetAll
 
-  app.get '/days/:dateString', auth, DayController.dayGet
+  app.get '/entries/:dateString', auth, EntryController.entryGet
 
-  app.post '/days/:dateString', auth, DayController.dayEnter
+  app.post '/entries/:dateString', auth, EntryController.entryEnter
 
 
   # ## PUTs

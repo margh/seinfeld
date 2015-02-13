@@ -4,11 +4,11 @@ module.exports = [
     constructor: (dayService) ->
       window.jctrl = this
       @service = dayService
-      @day = dayService.selectedDay
+      @day = dayService.selected
 
-    enterDay: (day) =>
-      day.toggle()
-      @service.enterDay(day, @response)
+    enterDay: =>
+      @day.checked = !@day.checked
+      @service.enterDay @day
 
     getArrowPosition: ->
       if @day.moment
@@ -18,7 +18,6 @@ module.exports = [
           return @day.moment.day()
       return -1
 
-    response: (e) =>
-      if e then console.log 'do something about errros'
-      console.log 'great success'
+    displayDay: ->
+      return @day.moment.format("dddd, MMMM Do YYYY")
 ]

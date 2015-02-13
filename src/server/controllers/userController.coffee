@@ -33,6 +33,7 @@ module.exports =
             console.log doc.email, 'logged in'
             lastLogin = uuid.v4()
             doc.lastLogin = lastLogin
+            doc.lastLoginTime = Date.now()
             doc.save()
             res.cookie 'login', lastLogin, { expires: moment().endOf('day').toDate(), signed: true }
             res.cookie 'username', doc.username, { expires: moment().endOf('day').toDate() }
