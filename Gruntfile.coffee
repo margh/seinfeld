@@ -43,6 +43,7 @@ module.exports = (grunt) ->
             'bower_components/angular/angular.js'
             'bower_components/angular-ui-utils/ui-utils.js'
             'bower_components/angular-cookies/angular-cookies.js'
+            'bower_components/angular-animate/angular-animate.js'
             'bower_components/moment/moment.js'
             'bower_components/bootstrap/dist/js/bootstrap.js'
           ]

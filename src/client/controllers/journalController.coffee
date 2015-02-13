@@ -20,4 +20,7 @@ module.exports = [
 
     displayDay: ->
       return @day.moment.format("dddd, MMMM Do YYYY")
+
+    dayChecked: ->
+      return @day.checked
 ]

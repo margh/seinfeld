@@ -1,6 +1,7 @@
 @journal-height: 30vh;
 @journal-color: #222;
 @journal-border-color: #808080;
+@journal-text-colour: ivory;
 
 body {
   padding-bottom: @journal-height;
@@ -13,23 +14,46 @@ body {
 }
 
 .journal-header {
-  color: ivory;
+  color: @journal-text-colour;
+}
+
+// ############################
+//    Tickbox
+// ############################
+.journal-tick-wrapper {
+  display: inline-block;
 }
 
 .journal-day-box {
-  height: @journal-height;
-  line-height: @journal-height;
-  width: @day-size * 1.5;
+  margin: 5vh;
+  background: none;
+  border: 4px solid @journal-text-colour;
 }
 
 .journal-day-tick-grid {
-  height: @journal-height;
 }
 
 .journal-day-tick {
-  font-size: 5em;
+  color: @journal-text-colour;
+  font-size: 6em;
 }
 
+// ############################
+//    Notebox
+// ############################
+
+.journal-note-wrapper {
+  height: 30vh;
+  display: inline-block;
+}
+
+.journal-note-box {
+  margin: 5vh;
+}
+
+// ############################
+//    Arrow
+// ############################
 .generate-arrow-offset(@days-per-row);
 
 .generate-arrow-offset(@dpr, @i: 1) when (@i =< @dpr) {

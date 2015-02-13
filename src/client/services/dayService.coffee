@@ -34,8 +34,16 @@ module.exports = [ '$http', ($http) ->
 
     getEntries: ->
       $http.get('/entries/all')
-        .success (res) ->
+        .success (res) =>
+
+          # Update the date list with server date
           _.each res, _updateDay
+
+          # Set the values of the selected day if it was returned
+          # by the server
+          if selectedUpdate = _.findWhere res, {dateString: @selected.dateString}
+            @selectDay selectedUpdate
+
         .error errorHandler
 
     enterDay: (entry, cb) ->

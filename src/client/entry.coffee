@@ -13,6 +13,7 @@ app = angular.module 'calApp', [
   'templates-app'
   'ui.utils'
   'ngCookies'
+  'ngAnimate'
 ]
 
 app.service 'dayService', DayService
