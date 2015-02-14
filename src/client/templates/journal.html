@@ -1,9 +1,6 @@
-<nav class="navbar navbar-inverse navbar-fixed-bottom journal arrow-pos-{{jCtrl.getArrowPosition()}}">
-  <div>
-    <h1 ng-bind="jCtrl.displayDay()" class="journal-header pull-right"></h1>
-  </div>
+<nav class="row navbar navbar-inverse navbar-fixed-bottom journal arrow-pos-{{jCtrl.getArrowPosition()}}">
 
-  <div class="journal-tick-wrapper">
+  <div class="journal-tick-wrapper col-md-2">
     <div class="day-box journal-day-box" ng-click="jCtrl.enterDay()">
       <div class="day-tick-grid journal-day-tick-grid">
         <i class="day-tick journal-day-tick fa fa-check" ng-show="jCtrl.dayChecked()"></i>
@@ -11,10 +8,14 @@
     </div>
   </div>
 
-  <div class="journal-note-wrapper">
+  <div class="journal-note-wrapper col-md-4">
     <div class="journal-note-box">
       <textarea class="form-control" rows="5"></textarea>
     </div>
+  </div>
+
+  <div class="col-md-6">
+    <h1 ng-bind="jCtrl.displayDay()" class="journal-header pull-right"></h1>
   </div>
 
 </nav>
