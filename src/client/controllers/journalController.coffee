@@ -7,7 +7,7 @@ module.exports = [
       @day = dayService.selected
 
     enterDay: =>
-      @day.checked = !@day.checked
+      @service.toggleDay @day
       @service.enterDay @day
 
     getArrowPosition: ->

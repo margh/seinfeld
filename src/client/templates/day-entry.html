@@ -1,4 +1,4 @@
-<div class="day-box" ng-class="{ 'day-box-even' : day.monthIsEven() , 'day-box-odd' : !day.monthIsEven() }" ng-click="calCtrl.selectDay(day)">
+<span class="day-box" ng-class="{ 'day-box-even' : day.monthIsEven() , 'day-box-odd' : !day.monthIsEven() }" ng-click="calCtrl.selectDay(day)" ng-dblclick="calCtrl.enterDay(day)">
   <div class="day-date">
     <span ng-show="day.moment.date() === 1"> {{ day.moment.format('MMM') }}</span>
     {{day.moment.format('ddd D')}}
@@ -6,4 +6,4 @@
   <div class="day-tick-grid">
     <i class="day-tick fa fa-check" ng-show="day.checked"></i>
   </div>
-</div>
+</span>

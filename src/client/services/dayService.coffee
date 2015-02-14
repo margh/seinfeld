@@ -51,6 +51,9 @@ module.exports = [ '$http', ($http) ->
         .success _updateDay
         .error errorHandler
 
+    toggleDay: (day) ->
+      day.checked = !day.checked
+
     # This sucks
     # but you have to do it because
     # if you directly set the object your controllers
