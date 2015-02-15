@@ -1,7 +1,7 @@
 <span class="day-box"
 ng-class="{ 'day-active-month' : dCtrl.isActiveMonth(day), 'day-active-week' : dCtrl.isActiveWeek(day), 'day-active-day': dCtrl.isActiveDay(day)}"
 ng-click="calCtrl.selectDay(day)"
-ng-dblclick="calCtrl.enterDay(day)"
+ng-dblclick="calCtrl.checkDay(day)"
 >
   <div class="day-date">
     <span ng-show="day.moment.date() === 1"> {{ day.moment.format('MMM') }}</span>

@@ -6,8 +6,14 @@ module.exports = [
       @service = dayService
       @day = dayService.selected
 
-    enterDay: =>
+      @noteDm = null
+
+    checkDay: =>
       @service.toggleDay @day
+      @service.enterDay @day
+
+    addNote: ->
+      @day.notes.push @noteDm
       @service.enterDay @day
 
     getArrowPosition: ->
@@ -19,4 +25,7 @@ module.exports = [
 
     dayChecked: ->
       return @day.checked
+
+    getNotes: ->
+      return @day.notes
 ]

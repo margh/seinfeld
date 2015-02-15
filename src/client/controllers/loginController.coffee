@@ -3,7 +3,6 @@ module.exports = [
   'dayService'
   class LoginController
     constructor: (@authenticationService, @dayService) ->
-      window.lctrl = this
       @model =
         email: 'nathan@admin'
         password: 'administration'
