@@ -7,8 +7,11 @@ module.exports = [
         email: 'nathan@admin'
         password: 'administration'
 
-      @authenticated = @authenticationService.isAuthenticated()
-      @username      = @authenticationService.getUsername()
+      @authenticationService.getAuthenticated()
+      @authenticationService.getUsername()
+
+      @authenticated = @authenticationService.authenticated
+      @username      = @authenticationService.username
 
     reset: =>
       @model.email = ''
