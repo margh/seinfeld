@@ -2,15 +2,15 @@ errorHandler = (data, status, headers, config) ->
   console.log status, data
 
 module.exports = [ '$http', '$cookies', 'dayService', ($http, $cookies, dayService) ->
-  authenticated = false
-  username = null
+  authenticated = !!$cookies.login
+  username = $cookies.username
 
   return {
     getAuthenticated: ->
-      authenticated = !!$cookies.login
+      return authenticated
 
     getUsername: ->
-      username = $cookies.username
+      return username
 
     profile: (success, fail) ->
       $http.get('/profile')

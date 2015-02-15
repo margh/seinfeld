@@ -3,15 +3,13 @@ module.exports = [
   'dayService'
   class LoginController
     constructor: (@authenticationService, @dayService) ->
+      window.lctrl = this
       @model =
         email: 'nathan@admin'
         password: 'administration'
 
-      @authenticationService.getAuthenticated()
-      @authenticationService.getUsername()
-
-      @authenticated = @authenticationService.authenticated
-      @username      = @authenticationService.username
+      @authenticated = @authenticationService.getAuthenticated()
+      @username      = @authenticationService.getUsername()
 
     reset: =>
       @model.email = ''
