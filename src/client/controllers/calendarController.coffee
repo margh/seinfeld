@@ -16,6 +16,12 @@ module.exports = [
       @service.enterDay(day)
       @service.selectDay(day)
 
+    isActiveMonth: (day) =>
+      if @service.selected
+        return day.moment.month() is @service.selected.moment.month()
+      else
+        return false
+
     response: (e) =>
       if e then console.log 'do something about errros'
       console.log 'great success'

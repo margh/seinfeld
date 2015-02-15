@@ -5,6 +5,6 @@ module.exports = [
 
       @service = dayService
 
-    monthIsEven: =>
-      return @day.month() % 2 # January is 0
+    monthIsActive: =>
+      return @day.month() is @service.selected.moment.month()
 ]

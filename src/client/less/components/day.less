@@ -2,15 +2,13 @@
 @day-size: ((100 - (@calendar-padding * 2)) / @days-per-row);
 
 .day-box {
-  background-color: #AAA;
+  color: #888;
   display: inline-block;
   width: @day-size;
   height: @day-size;
   text-align: center;
 
-  border: solid 1px black;
-
-  border-radius: 5px;
+  border-top: solid 1px black;
 
   /* Don't select these */
   -webkit-user-select: none;  /* Chrome all / Safari all */
@@ -22,19 +20,17 @@
   overflow: hidden;
 }
 
-.day-box-even {
-  background-color: #888
+.day-active-month {
+  color: #222;
 }
 
 .day-date {
   // Gross, need it so the tick boxes get centred correctly though.
   position: absolute;
   width: @day-size;
-  border-bottom: 2px solid gray;
 }
 
 .day-box-even .day-date {
-  border-bottom: 2px solid #222;
 }
 
 .day-tick-grid {
