@@ -115,6 +115,9 @@ module.exports = (grunt) ->
       less:
         files: ['src/client/less/**/*.less']
         tasks: ['less:app', 'build:css']
+      server:
+        files: ['src/server/**/*.coffee']
+        tasks: ['server:dev']
       livereload:
         options:
           livereload: true
