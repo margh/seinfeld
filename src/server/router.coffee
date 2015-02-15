@@ -20,7 +20,11 @@ auth = (req, res, next) ->
     if validv4 req.signedCookies.login
       User.findByToken req.signedCookies.login, (err, user) ->
         if err then return next err
-        if user and Date.now() - user.lastLoginTime > loginExpireTime
+
+        if not user
+          return res.status(401).send {e: 'unauthorized'}
+
+        if Date.now() - user.lastLoginTime > loginExpireTime
           return res.status(401).send {e: 'loginExpired'}
         req.user = user
         next()
