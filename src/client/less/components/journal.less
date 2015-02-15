@@ -58,7 +58,7 @@ body {
 .generate-arrow-offset(@dpr, @i: 1) when (@i =< @dpr) {
   .arrow-pos-@{i}:before, arrow-pos-@{i}:after {
     bottom: 100%;
-    left: percentage((@i * (@day-size / 100)) + 0.045); //day-size in vw / don't really know why 7vw...
+    left: percentage((@i * (@day-size / 100)) + 0.04);
     border: solid transparent;
     content: " ";
     height: 0;

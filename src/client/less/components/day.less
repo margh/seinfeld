@@ -18,10 +18,27 @@
   user-select: none;
 
   overflow: hidden;
+
+  -webkit-transition: opacity, color, font-style linear 0.5s;
+  -mozilla-transition: opacity, color, font-style linear 0.5s;
+  transition: opacity, color, font-style linear 0.5s;
 }
 
 .day-active-month {
   color: #222;
+}
+
+.day-active-week {
+  border-top: solid 1px mediumpurple;
+}
+
+.day-active-day {
+  font-weight: bold;
+  border-top: solid 3px mediumpurple;
+}
+
+.day-active-week .day-date {
+  color: mediumpurple;
 }
 
 .day-date {
@@ -45,8 +62,9 @@
   width: 50%;
   font-size: 4em;
   flex: 1 0 auto;
-  -webkit-transition:all linear 0.5s;
-  transition:all linear 0.5s;
+  -webkit-transition: all linear 0.5s;
+  -mozilla-transition: all linear 0.5s;
+  transition: all linear 0.5s;
 }
 
 .day-tick.ng-hide {

@@ -1,13 +1,14 @@
 module.exports = [
   'authenticationService'
+  'dayService'
   class LoginController
-    constructor: (@service) ->
+    constructor: (@authenticationService, @dayService) ->
       @model =
         email: 'nathan@admin'
         password: 'administration'
 
-      @authenticated = @service.isAuthenticated()
-      @username      = @service.getUsername()
+      @authenticated = @authenticationService.isAuthenticated()
+      @username      = @authenticationService.getUsername()
 
     reset: =>
       @model.email = ''
@@ -17,12 +18,13 @@ module.exports = [
       login =
         email: @model.email
         password: @model.password
-      @service.login(login, @success, @fail)
+      @authenticationService.login(login, @success, @fail)
 
     success: (user) =>
       @reset()
       @authenticated = true
       @username = user.username
+      @dayService.getEntries()
 
     fail: (e) =>
       console.log 'login failed'

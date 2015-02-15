@@ -12,11 +12,7 @@ module.exports = [
 
     getArrowPosition: ->
       if @day.moment
-        if @day.moment.day() is 0
-          return 7
-        else
-          return @day.moment.day()
-      return -1
+        return @day.moment.day() + 1
 
     displayDay: ->
       return @day.moment.format("dddd, MMMM Do YYYY")

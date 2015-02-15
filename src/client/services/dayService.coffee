@@ -12,7 +12,7 @@ getDates = ->
 
   # Draw up to today
   today = moment()
-  start = moment().subtract(2,'months').startOf('isoweek') # Make sure we start on a Monday (need isoweek)
+  start = moment().subtract(2,'months').startOf('week') # Make sure we start on a Monday (need isoweek)
   range = start.twix(today).iterate('days')
   while range.hasNext()
     days.push range.next()
