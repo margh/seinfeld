@@ -13,6 +13,10 @@ loginExpireTime = 2592000000
 validv4 = (uuid) ->
   (uuid.search /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/) isnt -1
 
+clearLogin = (res) ->
+  res.clearCookie 'login'
+  res.clearCookie 'username'
+
 auth = (req, res, next) ->
   unless req.signedCookies.login
     res.status(401).send {e: 'unauthorized'}
@@ -22,10 +26,13 @@ auth = (req, res, next) ->
         if err then return next err
 
         if not user
+          clearLogin(res)
           return res.status(401).send {e: 'unauthorized'}
 
         if Date.now() - user.lastLoginTime > loginExpireTime
+          clearLogin(res)
           return res.status(401).send {e: 'loginExpired'}
+
         req.user = user
         next()
 
