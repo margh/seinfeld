@@ -20,7 +20,7 @@ getDates = ->
 
 module.exports = [ '$http', ($http) ->
   dates = _.map getDates(), (momentObj) ->
-    return new Day {moment: momentObj, dateString: momentObj.format('DD-MM-YYYY')}
+    return new Day {moment: momentObj, dateString: momentObj.format('YYYY-MM-DD')}
 
   _updateDay = (entry) ->
     date = _.findWhere dates, {dateString: entry.dateString}

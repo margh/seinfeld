@@ -1,11 +1,11 @@
 .day-box {
-  color: #888;
+  color: lighten(@day-font-color, 20%);
   display: inline-block;
   width: @day-size;
   height: @day-size;
   text-align: center;
 
-  border-top: solid 1px black;
+  border-top: solid 1px @day-font-color;
 
   /* Don't select these */
   -webkit-user-select: none;  /* Chrome all / Safari all */
@@ -22,20 +22,24 @@
 }
 
 .day-active-month {
-  color: #222;
+  color: @day-font-color;
 }
 
 .day-active-week {
-  border-top: solid 1px mediumpurple;
+  border-top: solid 3px darken(@day-highlight, 20%);
+}
+
+.day-active-week .day-date, .day-active-week .day-tick{
+  color: darken(@day-highlight, 20%);
 }
 
 .day-active-day {
   font-weight: bold;
-  border-top: solid 3px mediumpurple;
+  border-top: solid 3px @day-highlight;
 }
 
-.day-active-week .day-date {
-  color: mediumpurple;
+.day-active-day .day-date, .day-active-day .day-tick {
+  color: @day-highlight;
 }
 
 .day-date {
