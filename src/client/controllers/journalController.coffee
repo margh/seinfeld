@@ -14,6 +14,7 @@ module.exports = [
 
     addNote: ->
       @day.notes.push @noteDm
+      @noteDm = null
       @service.enterDay @day
 
     getArrowPosition: ->

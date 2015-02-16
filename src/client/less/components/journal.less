@@ -7,6 +7,7 @@ body {
   background: @journal-color;
   padding: 0 4vw 0 0;
   color: @journal-text-colour;
+  border: none;
 }
 
 .journal-header {
@@ -21,11 +22,11 @@ body {
 .journal-day-box {
   margin: 5vh;
   background: none;
-  border: 4px solid @journal-text-colour;
+  border: 4px solid @highlight;
 }
 
 .journal-day-tick-grid {
-  color: @journal-text-colour;
+  color: @highlight;
 }
 
 .journal-day-tick {
@@ -48,6 +49,16 @@ body {
 .journal-note-list {
   margin-top: 2vh;
 }
+
+.journal-note-header {
+  font-size: 1.5em;
+  margin-bottom: 0.5vw;
+}
+
+.journal-note-header-text {
+  margin-left: 1vw;
+}
+
 
 // ############################
 //    Arrow
