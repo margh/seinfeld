@@ -25,6 +25,8 @@ auth = (req, res, next) ->
       User.findByToken req.signedCookies.login, (err, user) ->
         if err then return next err
 
+        # TODO userController clear login
+
         if not user
           clearLogin(res)
           return res.status(401).send {e: 'unauthorized'}

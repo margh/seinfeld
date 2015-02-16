@@ -53,3 +53,9 @@ app.directive 'day', ->
   restrict: 'E'
   templateUrl: 'templates/day-entry'
   controller: 'DayController as dCtrl'
+  link: ($scope, $elm, attrs) ->
+    journalTickOffset = (window.innerHeight / 100) * 2
+    $elm.on 'click', ->
+      $('body').animate
+        scrollTop:
+          ($elm.offset().top - window.innerHeight) + ($('#journal').height() + journalTickOffset)
