@@ -20,6 +20,7 @@ module.exports =
             createdUser = new User user
             createdUser.save (e, doc) ->
               if e then return next(e)
+              console.log 'registered user', doc
               res.sendStatus 201
 
   userLogin: (req, res, next) ->
