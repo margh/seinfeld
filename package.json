@@ -7,6 +7,7 @@
   ],
   "version": "0.0.1",
   "author": "Nathan Rashleigh <nrashleigh@smokestack.io> (http://smokestack.io)",
+  "repository": "https://github.com/margh/seinfeld/",
   "dependencies": {
     "bcrypt": "^0.8.0",
     "body-parser": "^1.10.0",
@@ -39,6 +40,7 @@
   },
   "scripts": {
     "test": "mocha --compilers coffee:coffee-script/register -R spec -G",
-    "db": "mongod --dbpath ./db"
+    "db": "mongod --dbpath ./db",
+    "dev": "grunt dev"
   }
 }
