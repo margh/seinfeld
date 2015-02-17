@@ -13,5 +13,6 @@ coverage.html
 bower_components/
 public/*
 .idea
+.env
 db/
 lib/

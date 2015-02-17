@@ -4,7 +4,7 @@ Entry = require './../structures/entryStructure'
 module.exports =
   entryEnter: (req, res, next) ->
     entry = _.pick req.body, ['checked', 'dateString', 'notes']
-    console.log entry
+    console.log req.user.username, 'posted', entry
     Entry.findOneAndUpdate {userId: req.user.id, dateString: entry.dateString}, entry, {upsert: true}, (e, entry) ->
       if e then return next(e)
       res.status 201

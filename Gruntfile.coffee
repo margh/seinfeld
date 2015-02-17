@@ -101,7 +101,6 @@ module.exports = (grunt) ->
       dev:
         options:
           opts: ['node_modules/coffee-script/bin/coffee']
-          port: 40080
           script: 'src/server/server.coffee'
 
     # Watch these files and re-run the specified tasks when they change
