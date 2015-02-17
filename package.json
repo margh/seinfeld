@@ -41,9 +41,9 @@
     "npm": "~1.4"
   },
   "scripts": {
+    "postinstall": "bower install",
+    "start": "grunt dev",
     "test": "mocha --compilers coffee:coffee-script/register -R spec -G",
-    "db": "mongod --dbpath ./db",
-    "bower": "bower install",
-    "dev": "grunt dev"
+    "db": "mongod --dbpath ./db"
   }
 }
