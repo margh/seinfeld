@@ -10,7 +10,7 @@ module.exports = (grunt) ->
     # Compiles coffee into browser-ready js
     browserify:
       app:
-        files: 'public/js/core.js': ['src/client/entry.coffee']
+        files: 'public/tmp/core.js': ['src/client/entry.coffee']
         options:
           transform: ['coffeeify']
           browserifyOptions:
@@ -26,7 +26,7 @@ module.exports = (grunt) ->
             name = name.replace '.html', ''
             return name
         src: ['src/client/templates/**/*.html']
-        dest: 'public/js/templates.js'
+        dest: 'public/tmp/templates.js'
 
 
     # Concat and minify JS deps
@@ -37,7 +37,7 @@ module.exports = (grunt) ->
           sourceMapIncludeSources: true
           beautify: true
         files:
-          'public/js/lib.js': [
+          'public/tmp/lib.js': [
             'bower_components/jquery/dist/jquery.js'
             'bower_components/lodash/dist/lodash.js'
             'bower_components/angular/angular.js'
@@ -53,27 +53,27 @@ module.exports = (grunt) ->
         options:
           sourceMap: false
         files:
-          'public/js/app.js': [
-            'public/js/lib.js'
-            'public/js/app.js'
-            'public/js/templates.js'
+          'public/js/cal.js': [
+            'public/tmp/lib.js'
+            'public/tmp/templates.js'
+            'public/tmp/core.js'
           ]
 
     # Build bootstrap with custom overrides and compile bespoke less
     less:
       app:
         files:
-          'lib/bootstrap.css': 'src/client/less/bootstrap.less'
-          'lib/styles.css': 'src/client/less/styles.less'
+          'public/tmp/bootstrap.css': 'src/client/less/bootstrap.less'
+          'public/tmp/styles.css': 'src/client/less/styles.less'
 
     # Compiles all custom and dep styles into one css file
     cssmin:
       app:
         files:
           'public/css/main.css': [
-            'lib/bootstrap.css'
+            'public/tmp/bootstrap.css'
             'bower_components/font-awesome/css/font-awesome.css'
-            'lib/styles.css'
+            'public/tmp/styles.css'
           ]
 
     # Copy fonts from libraries
@@ -128,9 +128,9 @@ module.exports = (grunt) ->
 
     # Cleans (deletes files in) these folders
     clean:
-      app: ['app']
-      dev: ['public/js/*']
-      dist: ['public/js/*']
+      all: ['public']
+      dev: ['public/tmp/*']
+      dist: ['public/tmp']
 
   grunt.loadNpmTasks 'grunt-browserify'
   grunt.loadNpmTasks 'grunt-contrib-clean'
@@ -167,19 +167,18 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'build:dist', [
-    'clean:app'
+    'clean:all'
     'build:js'
     'uglify:lib'
-    'uglify::dist'
+    'uglify:dist'
     'clean:dist'
     'less:app'
     'build:css'
     'copy:fonts'
-    'jade:dist'
   ]
 
   grunt.registerTask 'dev', ['build:dev', 'server:dev', 'watch']
-  # grunt.registerTask 'dist', ['build:dist', 'server:dev']
+  grunt.registerTask 'dist', ['build:dist']
 
   # grunt.registerTask 'test', ['build:js', 'karma:once']
   # grunt.registerTask 'test-watch', ['build:js', 'karma:unit']

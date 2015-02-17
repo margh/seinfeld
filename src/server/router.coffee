@@ -6,6 +6,9 @@ User = require './structures/userStructure'
 UserController = require './controllers/userController'
 EntryController = require './controllers/entryController'
 
+debug = !process.env.NODE_ENV is 'production'
+console.log 'Debug:', debug
+
 # 30 days
 loginExpireTime = 2592000000
 
@@ -45,7 +48,7 @@ module.exports = (app) ->
 
   # ## GETs
   app.get '/', (req, res) ->
-    res.sendfile './public/index.html'
+    res.render 'index', { debug }
 
   app.get '/entries/all', auth, EntryController.entryGetAll
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  {% if debug %}
+    <script src="/tmp/lib.js"></script>
+    <script src="/tmp/templates.js"></script>
+    <script src="/tmp/core.js"></script>
+  {% else %}
+    <script src="/js/cal.js"></script>
+  {% endif %}
+
+  <!-- calendar -->
+  <link href="/css/main.css" rel="stylesheet">
+
+</head>
+
+<body ng-app="calApp">
+  <div id="main">
+
+    <calendar></calendar>
+
+    <journal></journal>
+
+    <register></register>
+
+  </div>
+</body>
