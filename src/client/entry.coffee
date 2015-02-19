@@ -39,10 +39,21 @@ app.directive 'register', ->
   templateUrl: 'templates/register-modal'
   controller: 'RegisterController as regCtrl'
 
-app.directive 'calendar', ->
+app.directive 'calendar', ['dayService', (dayService) ->
   restrict: 'E'
   templateUrl: 'templates/calendar'
   controller: 'CalendarController as calCtrl'
+  link: ($scope, $elm, attrs) ->
+    _.defer -> $(document).scrollTop($(document).height())
+    minHeight = 200
+    prependDays = ->
+      if $(document).scrollTop() < minHeight
+        oldHeight = $(document).height()
+        dayService.prependDays()
+        $scope.$digest()
+        window.scrollBy(0, $(document).height() - oldHeight);
+    $(document).scroll(_.throttle prependDays, 1000)
+]
 
 app.directive 'journal', ->
   restrict: 'E'

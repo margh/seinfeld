@@ -24,7 +24,6 @@ module.exports = [ '$http', '$cookies', 'dayService', ($http, $cookies, dayServi
         .error errorHandler
 
     login: (loginData, success, fail) ->
-      console.log loginData
       $http.post('/login', loginData)
         .success success
         .error fail

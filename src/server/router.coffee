@@ -6,7 +6,7 @@ User = require './structures/userStructure'
 UserController = require './controllers/userController'
 EntryController = require './controllers/entryController'
 
-debug = !process.env.NODE_ENV is 'production'
+debug = !(process.env.NODE_ENV is 'production')
 console.log 'Debug:', debug
 
 # 30 days

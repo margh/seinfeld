@@ -2,6 +2,7 @@ module.exports = [
   'dayService',
   class CalendarController
     constructor: (dayService) ->
+      window.cal = this
       @service = dayService
       @days = @service.dates
 

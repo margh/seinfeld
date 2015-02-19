@@ -7,35 +7,36 @@ Day = require './../models/day'
 errorHandler = (data, status, headers, config) ->
   console.log status, data
 
-getDates = ->
+getTwoMonths = (end) ->
   days  = []
 
-  # Draw up to today
-  today = moment()
-  start = moment().subtract(2,'months').startOf('week') # Make sure we start on a Monday (need isoweek)
-  range = start.twix(today).iterate('days')
+  end ?= moment()
+  start = moment(end).subtract(2,'months').startOf('week')
+  range = start.twix(end).iterate('days')
   while range.hasNext()
     days.push range.next()
   return days
 
 module.exports = [ '$http', ($http) ->
-  dates = _.map getDates(), (momentObj) ->
+  dates = _.map getTwoMonths(), (momentObj) ->
     return new Day {moment: momentObj, dateString: momentObj.format('YYYY-MM-DD')}
+
+  entries = []
 
   _updateDay = (entry) ->
     date = _.findWhere dates, {dateString: entry.dateString}
     if date
-      for key, value of entry
-        date[key] = value
+      _.assign date, entry
 
   return {
     selected: {}
     dates: dates
+    entries: entries
 
     getEntries: ->
       $http.get('/entries/all')
         .success (res) =>
-
+          entries = res
           # Update the date list with server date
           _.each res, _updateDay
 
@@ -45,6 +46,18 @@ module.exports = [ '$http', ($http) ->
             @selectDay selectedUpdate
 
         .error errorHandler
+
+    prependDays: ->
+      finalDate = moment(dates[0].moment).subtract(1,'day') # no dupes of first day
+      days = getTwoMonths(finalDate)
+      days.reverse()
+      _.each days, (momentObj) ->
+        newDay = new Day {moment: momentObj, dateString: momentObj.format('YYYY-MM-DD')}
+        entry = _.findWhere entries, {dateString: newDay.dateString}
+        if entry
+          _.assign newDay, entry
+        dates.unshift newDay
+
 
     enterDay: (entry, cb) ->
       $http.post("/entries/#{entry.dateString}", entry)
@@ -58,9 +71,8 @@ module.exports = [ '$http', ($http) ->
     # but you have to do it because
     # if you directly set the object your controllers
     # will lose the reference to the object and won't
-    # watch for value changes.
+    # detect value changes.
     selectDay: (day) ->
-      for key, value of day
-        @selected[key] = value
+      _.assign @selected, day
   }
 ]
