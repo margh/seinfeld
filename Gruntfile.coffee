@@ -39,7 +39,7 @@ module.exports = (grunt) ->
         files:
           'public/tmp/lib.js': [
             'bower_components/jquery/dist/jquery.js'
-            'bower_components/lodash/dist/lodash.js'
+            'bower_components/lodash/lodash.js'
             'bower_components/angular/angular.js'
             'bower_components/angular-ui-utils/ui-utils.js'
             'bower_components/angular-cookies/angular-cookies.js'

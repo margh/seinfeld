@@ -27,7 +27,11 @@
       </div>
 
       <div class="journal-note-list">
-        <p ng-repeat="note in jCtrl.getNotes() track by $index"><i class="fa fa-circle-o"></i>  {{note}}</p>
+        <div ng-repeat="note in jCtrl.getNotes() track by $index" class="journal-note-entry">
+          <i class="fa fa-circle-o journal-note-dot"></i>
+          <i class="fa fa-remove journal-note-x" ng-click="jCtrl.removeNote($index)"></i>
+          <span class="journal-note">{{note}}</span>
+        </div>
       </div>
     </div>
   </div>
