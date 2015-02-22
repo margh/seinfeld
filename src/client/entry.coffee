@@ -46,13 +46,25 @@ app.directive 'calendar', ['dayService', (dayService) ->
   link: ($scope, $elm, attrs) ->
     _.defer -> $(document).scrollTop($(document).height())
     minHeight = 200
+
     prependDays = ->
       if $(document).scrollTop() < minHeight
         oldHeight = $(document).height()
         dayService.prependDays()
         $scope.$digest()
         window.scrollBy(0, $(document).height() - oldHeight);
+
+    scrollToTodayBtn = ->
+      distanceFromBottom = $(document).height() - ($(window).height() + $(document).scrollTop())
+      if distanceFromBottom > (window.innerHeight / 7) # close enough to day size
+        $('#scrollToTodayBtn').css('opacity', 1)
+      else
+        $('#scrollToTodayBtn').css('opacity', 0)
+
+    $(document).scroll(_.throttle scrollToTodayBtn, 500)
     $(document).scroll(_.throttle prependDays, 1000)
+    $('#scrollToTodayBtn').click ->
+      $(document).scrollTop($(document).height())
 ]
 
 app.directive 'journal', ->

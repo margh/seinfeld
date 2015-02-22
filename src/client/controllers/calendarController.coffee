@@ -7,10 +7,13 @@ module.exports = [
       @days = @service.dates
 
       @service.getEntries()
-      @selectDay @days[@days.length - 1] # default to today
+      @selectToday() # default to today
 
     selectDay: (day) =>
       @service.selectDay(day)
+
+    selectToday: ->
+      @selectDay @days[@days.length - 1]
 
     enterDay: (day) =>
       @service.toggleDay(day)

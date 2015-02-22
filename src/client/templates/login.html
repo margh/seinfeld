@@ -1,15 +1,15 @@
 <div>
   <p class="pull-right" ng-show="loginCtrl.authenticated">Welcome back <span ng-bind="loginCtrl.username"></span>.</p>
 
-  <form class="form-signin form-inline" role="login" ng-submit="loginCtrl.submit()" ng-hide="loginCtrl.authenticated">
+  <form class="form-signin form-inline" role="login" ng-hide="loginCtrl.authenticated">
     <input class="form-control" ng-model="loginCtrl.model.email" type="text" placeholder="Email">
     <input class="form-control" ng-model="loginCtrl.model.password" type="password" placeholder="Password">
-    <button class="form-control btn btn-primary" type="submit" >Login</button>
     <!-- <div class="input-group checkbox">
       <span class="input-group-addon"><input type="checkbox" value="remember-me"></span>
       <span class="input-group-addon">Remember me</span>
     </div> -->
     <button class="btn btn-default" data-toggle="modal" data-target="#register-modal" ng-hide="loginCtrl.authenticated">Register</button>
+    <button class="form-control btn btn-primary" ng-click="loginCtrl.submit()">Login</button>
   </form>
 
 </div>

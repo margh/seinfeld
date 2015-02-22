@@ -8,5 +8,9 @@
     <div class="cal-header-day">Fri</div>
     <div class="cal-header-day">Sat</div>
   </div>
+  <div class="btn btn-default btn-sm" id='scrollToTodayBtn' ng-click="calCtrl.selectToday()">
+    <p>Scroll to today</p>
+    <i class="fa fa-level-down"></i>
+  </div>
   <day ng-repeat="day in calCtrl.days"></day>
 </div>
