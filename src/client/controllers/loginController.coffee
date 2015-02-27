@@ -4,8 +4,8 @@ module.exports = [
   class LoginController
     constructor: (@authenticationService, @dayService) ->
       @model =
-        email: 'nathan@admin'
-        password: 'administration'
+        email: ''
+        password: ''
 
       @authenticated = @authenticationService.getAuthenticated()
       @username      = @authenticationService.getUsername()
